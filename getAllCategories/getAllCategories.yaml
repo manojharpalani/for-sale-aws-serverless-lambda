@@ -1,0 +1,25 @@
+﻿AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: An AWS Serverless Specification template describing your function.
+Resources:
+  getAllCategories:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: index.getAllCategories
+      Runtime: nodejs6.10
+      CodeUri: .
+      Description: ''
+      MemorySize: 128
+      Timeout: 3
+      Role: 'arn:aws:iam::559308092655:role/lambda_dynamodb_role'
+      Events:
+        Api1:
+          Type: Api
+          Properties:
+            Path: /categories
+            Method: GET
+      Environment:
+        Variables:
+          TABLE_NAME: forsale-categories
+      Tags:
+        project: ForSale

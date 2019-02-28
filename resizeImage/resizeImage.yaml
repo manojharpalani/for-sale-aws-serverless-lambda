@@ -1,0 +1,24 @@
+﻿AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: An AWS Serverless Specification template describing your function.
+Resources:
+  resizeImage:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs6.10
+      CodeUri: .
+      Description: ''
+      MemorySize: 128
+      Timeout: 3
+      Role: 'arn:aws:iam::559308092655:role/lamba-dynamodb-s3-access'
+      Events:
+        Api1:
+          Type: Api
+          Properties:
+            Path: /posts/image
+            Method: GET
+      Environment:
+        Variables:
+          BUCKET: for-sale-s3
+          URL: 'http://for-sale-s3.s3-website-us-west-2.amazonaws.com'

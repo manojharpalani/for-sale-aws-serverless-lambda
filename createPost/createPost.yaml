@@ -1,0 +1,35 @@
+﻿AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: Function to create a new post in for sale
+Resources:
+  createPost:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: index.createPost
+      Runtime: nodejs6.10
+      CodeUri: .
+      Description: Function to create a new post in for sale
+      MemorySize: 128
+      Timeout: 3
+      Role: 'arn:aws:iam::559308092655:role/lambda_dynamodb_role'
+      Events:
+        Api1:
+          Type: Api
+          Properties:
+            Path: /MyResource
+            Method: ANY
+        Api2:
+          Type: Api
+          Properties:
+            Path: /MyResource
+            Method: ANY
+        Api3:
+          Type: Api
+          Properties:
+            Path: /posts
+            Method: POST
+      Environment:
+        Variables:
+          TABLE_NAME: forsale-posts
+      Tags:
+        project: ForSale
